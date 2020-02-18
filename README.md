@@ -1,33 +1,30 @@
-dnyScriptParser developed by Daniel Brendel
-======================================
+# dnyScriptParser developed by Daniel Brendel
 
 (C) 2017 - 2018 by Daniel Brendel
 
-Version: 0.1
-Contact: dbrendel1988<at>gmail<dot>com
-GitHub: https://github.com/danielbrendel/
+**Version**: 0.1\
+**Contact**: dbrendel1988<at>gmail<dot>com\
+**GitHub**: https://github.com/danielbrendel/
 
 Released under the MIT license
 
-Feature overview:
-*****************
-+ Scripting Engine for application-embedded scripting
-+ User-friendly scripting syntax
-+ Interface between script engine and engine user (data, code)
-+ Default internal commands
-+ Sticks to C++ STD in order to provide compatibility
+## Feature overview:
+* Scripting Engine for application-embedded scripting
+* User-friendly scripting syntax
+* Interface between script engine and engine user (data, code)
+* Default internal commands
+* Sticks to C++ STD in order to provide compatibility
  
-Syntax:
-*******
+## Syntax:
 The script language is a command-based language. This makes the syntax be as follows:
-<cmd_ident> <expression2> <expression3> <expression n...>;
+(cmd_ident) (expression2) (expression3) (expression n...);
 Now 'cmd_ident' is the identifier of a specific command. 'expression2' - 'expression n'
 are considered arguments to a specific command. Each command must be ended with a semicolon (";"). 
 In order to allow complex scripts it is neccessary to summarize/collect expressions with collector characters. 
 These are quotation marks ("") and brackets ("()" and "{}"). This allows you to format your command call
 as follows:
 myCommandIdent "argument1" (argument2a, arguments3a, ...) { complex argument ("test1", "test2");};
-Each command or empty line can be noted with a '#<comment>' to comment your scripts.
+Each command or empty line can be noted with a '#(comment)' to comment your scripts.
 When writing your scripts you should pay attention to a good coding-style which offers the reader
 to have a better glance at your scripts. Some commands require an argument expression and a code expression.
 Altough not neccessarly required you should put argument expressions in () brackets and code expressions
@@ -43,8 +40,7 @@ print "%arg1 %arg2"; #This is a comment
 As you can see some commands may require arguments provided as an array list, separated by a commas,
 in a single expression.
 
-Examples:
-*********
+## Examples:
 
 1) Using comments
 Comments are indicated by a #-character. Everything what follows
@@ -122,57 +118,53 @@ if the script execution is considered uncontinueable. If you want to return valu
 do not affect further script execution and which shall be handled by the script code then 
 you should stick to the result-command interface. It supports all dny-data types.
 
-Internal command reference:
-***************************
-const constname consttype <= value; //Registers a constant with the given name, type and value
-declare varname vartype; //Registers a global variable with the associated type
-set varname <= value; //Assigns a value to a global/local variable
-undeclare varname; //Removes a global variable
-function name rettype(paramters) {code} //Defines a function
-local varname vartype; //Registers a local function variable inside a function with the associated type
-result value; //Sets the result value of the associated function
-call funcname(arguments) => resultvar //Calls a function with paramters (if required) and stores the result (if required)
-if (cond1, operation, cond2) {code} <elseif (cond1, operation, cond2) {code}> <else {code}> //Performs an if-elseif-else evaluation. Elseif's and else's are optional. 'operation' can either be -eq(equal), -nt(not equal), -ls(less than), -lse(less than or equal), -gr(greater than) and -gre(greater than or equal).
+## Internal command reference:
+const constname consttype <= value; //Registers a constant with the given name, type and value\
+declare varname vartype; //Registers a global variable with the associated type\
+set varname <= value; //Assigns a value to a global/local variable\
+undeclare varname; //Removes a global variable\
+function name rettype(paramters) {code} //Defines a function\
+local varname vartype; //Registers a local function variable inside a function with the associated type\
+result value; //Sets the result value of the associated function\
+call funcname(arguments) => resultvar //Calls a function with paramters (if required) and stores the result (if required)\
+if (cond1, operation, cond2) {code} <elseif (cond1, operation, cond2) {code}> <else {code}> //Performs an if-elseif-else evaluation. Elseif's and else's are optional. 'operation' can either be -eq(equal), -nt(not equal), -ls(less than), -lse(less than or equal), -gr(greater than) and -gre(greater than or equal).\
 for (varname, startvalue, endvalue, step) {code} //Performs a for-loop with positive or negative values (use -inc for 1 and -dec for -1 or a step value)
-while (cond1, operation, cond2) {code} //Performs a while-loop. 'operation' can either be -eq(equal), -nt(not equal), -ls(less than), -lse(less than or equal), -gr(greater than) and -gre(greater than or equal).
-execute scriptfile; //Executes a script file relative to the base directory
-print text; //Prints text to the standard output if set by script user
-exit; //Aborts script execution
-++ var; //Increments a variable
--- var; //Decrements a variable
-+= var value; //Adds the value to the variable
--= var value; //Subtracts the value from the variable
-*= var value; //Multiplicates the value to the variable
-/= var value; //Divides the value from the variable
-+ var value1 value2; //Stores the sum to the variable
-- var value1 value2; //Stores the difference to the variable
-* var value1 value2; //Stores the product to the variable
-/ var value1 value2; //Stores the quotient to the variable
+while (cond1, operation, cond2) {code} //Performs a while-loop. 'operation' can either be -eq(equal), -nt(not equal), -ls(less than), -lse(less than or equal), -gr(greater than) and -gre(greater than or equal).\
+execute scriptfile; //Executes a script file relative to the base directory\
+print text; //Prints text to the standard output if set by script user\
+exit; //Aborts script execution\
+++ var; //Increments a variable\
+-- var; //Decrements a variable\
++= var value; //Adds the value to the variable\
+-= var value; //Subtracts the value from the variable\
+*= var value; //Multiplicates the value to the variable\
+/= var value; //Divides the value from the variable\
++ var value1 value2; //Stores the sum to the variable\
+- var value1 value2; //Stores the difference to the variable\
+* var value1 value2; //Stores the product to the variable\
+/ var value1 value2; //Stores the quotient to the variable\
 ! boolvar; //Reverses the boolean value of the variable
  
-Usage:
-******
-- Instantiate an object of CScriptingInterface object
-- Set a script base directory with SetScriptBaseDirectory() method if required
-- Set a standard output routine with SetStandardOutput() method if required
-- Register custom data types with RegisterDataType() if required
-- Register commands with RegisterCommand() method or variables with RegisterCVar() method 
+## Usage:
+* Instantiate an object of CScriptingInterface object
+* Set a script base directory with SetScriptBaseDirectory() method if required
+* Set a standard output routine with SetStandardOutput() method if required
+* Register custom data types with RegisterDataType() if required
+* Register commands with RegisterCommand() method or variables with RegisterCVar() method 
   (both kind of objects can also be unregistered if not needed anymore). Implement classes
   derived from IVoidCommandInterface interface for void-commands and IResultCommandInterface<(
   dnyDataType)> interface for commands that return a value.
-- Execute scripts via ExecuteScript() method or code via ExecuteCode() method
-- Use the methods BeginFunctionCall(), ExecuteFunction() and EndFunctionCall() to call a 
+* Execute scripts via ExecuteScript() method or code via ExecuteCode() method
+* Use the methods BeginFunctionCall(), ExecuteFunction() and EndFunctionCall() to call a 
   script function. If required you can push functions via the PushFunctionParam() methods
   and query function result data via the QueryFunctionResultAs*() methods.
-- Possible operation status values can be obtained via GetErrorInformation() method. It returns
+* Possible operation status values can be obtained via GetErrorInformation() method. It returns
   a class object instance which can be used to query the operation status code and an additional
   error message if the status was set to an error indicating value
 
-System requirements:
-********************
-+ ISO-conform C++ compiler
+## System requirements:
+* ISO-conform C++ compiler
 
-Changelog:
-**********
-# Version 0.1:
-	+ (Initial release)
+##Changelog:
+* Version 0.1:
+	* (Initial release)
