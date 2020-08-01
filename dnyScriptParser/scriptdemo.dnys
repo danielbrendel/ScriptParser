@@ -79,6 +79,25 @@ for(i, 10, 0, -dec)
 	};
 };
 
+class CTestClass {
+	member m_myVar int;
+	
+	method construct void()
+	{
+		print "Constructor called";
+	};
+	
+	method destruct void()
+	{
+		print "Destructor called";
+	};
+	
+	method TestFunc void(testvar int)
+	{
+		set %this.m_myVar <= %testvar;
+	};
+};
+
 declare whilevar int;
 set whilevar <= 0;
 while(%whilevar, -ls, 20)
@@ -92,6 +111,12 @@ undeclare whilevar;
 print "%whilevar";
 
 undeclare customvar;
+
+declare classInstance class;
+set classInstance <= CTestClass;
+call classInstance.TestFunc(1234) => void;
+print "Class member value: %classInstance.m_myVar";
+undeclare classInstance;
 
 exit;
 

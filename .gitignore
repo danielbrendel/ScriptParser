@@ -1,7 +1,4 @@
 .vs
 /dnyScriptParser/x64
 /x64/Debug
-/x64/Release/dnyScriptParser.exe
-/x64/Release/dnyScriptParser.exp
-/x64/Release/dnyScriptParser.lib
-/x64/Release/dnyScriptParser.pdb
+/x64/Release
