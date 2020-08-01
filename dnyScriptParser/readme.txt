@@ -92,7 +92,7 @@ result 0.1;
 function myComplexFunction int(arg1 string, arg2 float, arg3 bool)
 {
 result 0;
-}
+};
 The functions are called as follows:
 call myVoidFunction();
 call myFloatFunction() => myFloatVar;
