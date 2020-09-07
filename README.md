@@ -2,7 +2,7 @@
 
 (C) 2017 - 2020 by Daniel Brendel
 
-**Version**: 0.1\
+**Version**: 1.0\
 **Contact**: dbrendel1988<at>gmail<dot>com\
 **GitHub**: https://github.com/danielbrendel/
 
@@ -227,5 +227,5 @@ exit; //Aborts script execution\
 * ISO-conform C++ compiler
 
 ##Changelog:
-* Version 0.1:
+* Version 1.0:
 	* (Initial release)
