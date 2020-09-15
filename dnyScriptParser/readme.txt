@@ -38,7 +38,7 @@ function myFunction string "arg1 string, arg2 string" "print %arg1%arg2;";
 You can see that you couldn't include spacing between the argument accessor code. A better example would be:
 function myFunction string(arg1 string, arg2 string)
 {
-print "%arg1 %arg2"; #This is a comment
+	print "%arg1 %arg2"; #This is a comment
 };
 As you can see some commands may require arguments provided as an array list, separated by a commas,
 in a single expression.
@@ -76,8 +76,8 @@ set name2 <= "This is a test";
 4) Creating functions
 function myFunction type(arguments)
 {
-# function implementation here
-result 0;
+	# function implementation here
+	result 0;
 };
 Functions can either return a value or not. Also providing arguments is optional.
 The function arguments can handle the same types as shown in the variables section.
@@ -87,11 +87,11 @@ function myVoidFunction void()
 };
 function myFloatFunction float()
 {
-result 0.1;
+	result 0.1;
 }
 function myComplexFunction int(arg1 string, arg2 float, arg3 bool)
 {
-result 0;
+	result 0;
 };
 The functions are called as follows:
 call myVoidFunction();
@@ -100,10 +100,10 @@ call myComplexFunction("test1", 0.1, true) => myIntVar;
 You can also use local variables in functions:
 function myMoreComplexFunction float(arg1 float)
 {
-local temp float;
-set temp <= %arg1;
-*= temp %arg1;
-result %temp;
+	local temp float;
+	set temp <= %arg1;
+	*= temp %arg1;
+	result %temp;
 };
 
 5) Defining classes
