@@ -76,7 +76,7 @@ set name2 <= "This is a test";
 4) Creating functions
 function myFunction type(arguments)
 {
-#code
+# function implementation here
 result 0;
 };
 Functions can either return a value or not. Also providing arguments is optional.
