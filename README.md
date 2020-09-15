@@ -87,7 +87,7 @@ set name2 <= "This is a test";
 ```
 function myFunction type(arguments)
 {
-	#code
+	# function implementation here
 	result 0;
 };
 ```
