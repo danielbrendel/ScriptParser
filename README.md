@@ -119,8 +119,8 @@ function myMoreComplexFunction float(arg1 float)
 {
 	local temp float;
 	set temp <= %arg1;
-*= temp %arg1;
-result %temp;
+	*= temp %arg1;
+	result %temp;
 };
 ```
 
