@@ -100,11 +100,11 @@ function myVoidFunction void()
 };
 function myFloatFunction float()
 {
-result 0.1;
+	result 0.1;
 };
 function myComplexFunction int(arg1 string, arg2 float, arg3 bool)
 {
-result 0;
+	result 0;
 };
 ```
 The functions are called as follows:
