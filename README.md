@@ -42,7 +42,7 @@ You can see that you couldn't include spacing between the argument accessor code
 ```
 function myFunction string(arg1 string, arg2 string)
 {
-print "%arg1 %arg2"; #This is a comment
+	print "%arg1 %arg2"; #This is a comment
 };
 ```
 As you can see some commands may require arguments provided as an array list, separated by a commas,
