@@ -87,8 +87,8 @@ set name2 <= "This is a test";
 ```
 function myFunction type(arguments)
 {
-#code
-result 0;
+	#code
+	result 0;
 };
 ```
 Functions can either return a value or not. Also providing arguments is optional.
