@@ -117,8 +117,8 @@ You can also use local variables in functions:
 ```
 function myMoreComplexFunction float(arg1 float)
 {
-local temp float;
-set temp <= %arg1;
+	local temp float;
+	set temp <= %arg1;
 *= temp %arg1;
 result %temp;
 };
