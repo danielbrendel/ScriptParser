@@ -53,10 +53,12 @@ a comment is ignored by the parser.
 2) Declaring global and local variables
 declare name type;
 There are the following system types available:
+
 - bool -> A boolean value (true and false)
 - int -> A signed integer which is 64 bits in size
 - float -> A signed float which is 64 bits in size
 - string -> A string
+
 Additionally custom variable data types can be used.
 A declaration then is applied as follows:
 declare name customtypename;
@@ -74,25 +76,31 @@ local name2 string;
 set name2 <= "This is a test";
 
 4) Creating functions
+
 function myFunction type(arguments)
 {
 	# function implementation here
 	result 0;
 };
+
 Functions can either return a value or not. Also providing arguments is optional.
 The function arguments can handle the same types as shown in the variables section.
 If a function shall not return a value then the returntype shall be set as 'void'.
+
 function myVoidFunction void()
 {
 };
+
 function myFloatFunction float()
 {
 	result 0.1;
 }
+
 function myComplexFunction int(arg1 string, arg2 float, arg3 bool)
 {
 	result 0;
 };
+
 The functions are called as follows:
 call myVoidFunction();
 call myFloatFunction() => myFloatVar;
@@ -108,6 +116,7 @@ function myMoreComplexFunction float(arg1 float)
 
 5) Defining classes
 Sometimes tasks should be bound to objects. dnyScript provides a basic class structure functionality.
+
 class ClassName {
 	method myTestMethod void()
 	{
@@ -115,10 +124,12 @@ class ClassName {
 	
 	member myMember float;
 };
+
 You can define methods and variables similar to the global scope. Instead of using the keyword 'function' you use 
 'method'. And for member variables you use the keyword 'member'. Member variables are automatically allocated upon
 class instantiation and freed after the class instance gets removed from memory.
 You can also define a constructor and a destructor.
+
 class MyTestClass {
 	method construct void()
 	{
@@ -130,6 +141,7 @@ class MyTestClass {
 		print "Destructor called";
 	};
 };
+
 To access methods or members inside the class context you can use %this.
 
 6) Commands
