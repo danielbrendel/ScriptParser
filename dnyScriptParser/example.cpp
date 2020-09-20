@@ -1,6 +1,7 @@
 #include "dnyScriptParser.h"
 
 //dnyScriptParser example code
+//============================
 
 void dnyStandardOutputHandler(const std::wstring& wszOutputText)
 {
@@ -15,6 +16,7 @@ bool DT_MyDataType_DeclareVar(const std::wstring& wszName, dnyScriptParser::CVar
 	std::wcout << "DT_MyDataType_DeclareVar: " << wszName << L"|0x" << pCVar << std::endl;
 	return true;
 }
+
 bool DT_MyDataType_AssignVarValue(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar, const dnyScriptParser::CVarManager::ICustomVarValue& rCustomVarValue, bool bIsConst)
 {
 	std::wcout << "DT_MyDataType_AssignVarValue: " << wszName << L"|0x" << pCVar << L"|" << rCustomVarValue.QueryAsDnyString() << L"|" << bIsConst << std::endl;
@@ -22,16 +24,19 @@ bool DT_MyDataType_AssignVarValue(const std::wstring& wszName, dnyScriptParser::
 	wcscpy_s((wchar_t*)pCVar->CustomData(), rCustomVarValue.QueryAsDnyString().length() * 2, rCustomVarValue.QueryAsDnyString().c_str());
 	return true;
 }
+
 dnyScriptParser::dnyString DT_MyDataType_GetReplacerString(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar)
 {
 	std::wcout << "DT_MyDataType_GetReplacerString: " << wszName << L"|0x" << pCVar << std::endl;
 	return dnyScriptParser::dnyString((wchar_t*)pCVar->CustomData());
 }
+
 void DT_MyDataType_RemoveVar(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar)
 {
 	//Base memory cleanup is done by the CVar handler object
 	std::wcout << "DT_MyDataType_RemoveVar: " << wszName << L"|0x" << pCVar << std::endl;
 }
+
 dnyScriptParser::CVarManager::custom_cvar_type_s::cvar_type_event_table_s g_oMyDataTypeCVarEventTable = {
 	&DT_MyDataType_DeclareVar, &DT_MyDataType_AssignVarValue, &DT_MyDataType_GetReplacerString, &DT_MyDataType_RemoveVar
 };
