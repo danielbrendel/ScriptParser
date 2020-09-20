@@ -98,10 +98,12 @@ If a function shall not return a value then the returntype shall be set as 'void
 function myVoidFunction void()
 {
 };
+
 function myFloatFunction float()
 {
 	result 0.1;
 };
+
 function myComplexFunction int(arg1 string, arg2 float, arg3 bool)
 {
 	result 0;
