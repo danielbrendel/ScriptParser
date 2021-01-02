@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
 
 	//Call a function from the previously executed script file
 	if (oScriptingInterface.BeginFunctionCall(L"callme", dnyScriptParser::CVarManager::CT_INT)) {
-		oScriptingInterface.PushFunctionParam((dnyScriptParser::dnyInteger)2017);
+		oScriptingInterface.PushFunctionParam((dnyScriptParser::dnyInteger)2020);
 
 		oScriptingInterface.ExecuteFunction();
 
