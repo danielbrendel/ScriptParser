@@ -11,7 +11,7 @@ Released under the MIT license
 ## Feature overview:
 * Scripting Engine for application-embedded scripting
 * User-friendly scripting syntax
-* Interface between script engine and engine user (data, code)
+* Interface between script engine and engine user
 * Default internal commands
 * Sticks to C++ STD in order to provide compatibility
  
