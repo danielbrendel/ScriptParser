@@ -203,7 +203,7 @@ Usage:
   dnyDataType)> interface for commands that return a value.
 - Execute scripts via ExecuteScript() method or code via ExecuteCode() method
 - Use the methods BeginFunctionCall(), ExecuteFunction() and EndFunctionCall() to call a 
-  script function. If required you can push functions via the PushFunctionParam() methods
+  script function. If required you can push arguments via the PushFunctionParam() methods
   and query function result data via the QueryFunctionResultAs*() methods.
 - Possible operation status values can be obtained via GetErrorInformation() method. It returns
   a class object instance which can be used to query the operation status code and an additional
