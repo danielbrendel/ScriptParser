@@ -155,6 +155,15 @@ class MyTestClass {
 };
 ```
 To access methods or members inside the class context you can use %this.
+When accessing the class instance from outside you must prefix the class 
+instance identifier with an @ character except when accessing member variables.
+```
+declare classInstance class;
+set @classInstance <= MyTestClass;
+call @classInstance.SomeMethod() => void;
+set someVariable <= "%classInstance.MyVariable";
+undeclare @classInstance;
+```
 
 6) Commands
 The script user can implement own script commands which can retrieve arguments

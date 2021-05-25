@@ -96,6 +96,7 @@ class CTestClass {
 	method TestFunc void(testvar int)
 	{
 		set %this.m_myVar <= %testvar;
+		print "Set member variable to: %testvar";
 	};
 };
 
@@ -114,10 +115,10 @@ print "%whilevar";
 undeclare customvar;
 
 declare classInstance class;
-set classInstance <= CTestClass;
-call classInstance.TestFunc(1234) => void;
+set @classInstance <= CTestClass;
+call @classInstance.TestFunc(1234) => void;
 print "Class member value: %classInstance.m_myVar";
-undeclare classInstance;
+undeclare @classInstance;
 
 exit;
 

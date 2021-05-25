@@ -11,13 +11,13 @@ void dnyStandardOutputHandler(const std::wstring& wszOutputText)
 }
 
 //Example datatype handlers
-bool DT_MyDataType_DeclareVar(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar)
+bool DT_MyDataType_DeclareVar(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnyCustom>* pCVar)
 {
 	std::wcout << "DT_MyDataType_DeclareVar: " << wszName << L"|0x" << pCVar << std::endl;
 	return true;
 }
 
-bool DT_MyDataType_AssignVarValue(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar, const dnyScriptParser::CVarManager::ICustomVarValue& rCustomVarValue, bool bIsConst)
+bool DT_MyDataType_AssignVarValue(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnyCustom>* pCVar, const dnyScriptParser::CVarManager::ICustomVarValue& rCustomVarValue, bool bIsConst)
 {
 	std::wcout << "DT_MyDataType_AssignVarValue: " << wszName << L"|0x" << pCVar << L"|" << rCustomVarValue.QueryAsDnyString() << L"|" << bIsConst << std::endl;
 	pCVar->AcquireCustomSpace(rCustomVarValue.QueryAsDnyString().length() * 2 + 2); //Only once on declaration or every time a value is assigned
@@ -25,13 +25,13 @@ bool DT_MyDataType_AssignVarValue(const std::wstring& wszName, dnyScriptParser::
 	return true;
 }
 
-dnyScriptParser::dnyString DT_MyDataType_GetReplacerString(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar)
+dnyScriptParser::dnyString DT_MyDataType_GetReplacerString(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnyCustom>* pCVar)
 {
 	std::wcout << "DT_MyDataType_GetReplacerString: " << wszName << L"|0x" << pCVar << std::endl;
 	return dnyScriptParser::dnyString((wchar_t*)pCVar->CustomData());
 }
 
-void DT_MyDataType_RemoveVar(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnycustom>* pCVar)
+void DT_MyDataType_RemoveVar(const std::wstring& wszName, dnyScriptParser::CVarManager::ICVar<dnyScriptParser::dnyCustom>* pCVar)
 {
 	//Base memory cleanup is done by the CVar handler object
 	std::wcout << "DT_MyDataType_RemoveVar: " << wszName << L"|0x" << pCVar << std::endl;
