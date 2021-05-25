@@ -20,13 +20,14 @@ print "%stringvar %stringvar2"; #Comments can be put alone in a single line or a
 
 print "%customvar";
 
-if(%stringvar, -eq, "Hi there2")
-{
+if (%stringvar, -eq, "Hi there2") {
 	print "They are equal! %stringvar";
-}
-elseif(%stringvar, -nt, "Hi there2")
-{
+} elseif (%stringvar, -nt, "Hi there2") {
 	print "Elseif...";
+};
+
+if (%intvar, -ls, 200) {
+	print "It is less";
 };
 
 function somefunc int(arg1 string, arg2 string)
@@ -61,15 +62,15 @@ mycommand2 5 floatvar;
 
 print "3. %floatvar";
 
-for(i, 10, 0, -dec)
+for (i, 10, 0, -dec)
 {
-	if(%i, -lse, 4)
+	if (%i, -lse, 4)
 	{
 		print "Iteration num: %i";
 		
-		for(j, 0, 100, 50){print "Another for-loop! %j";};
+		for (j, 0, 100, 50) { print "Another for-loop! %j"; };
 	}
-	elseif(%i, -eq, 5)
+	elseif (%i, -eq, 5)
 	{
 		print "It's 5!";
 	}

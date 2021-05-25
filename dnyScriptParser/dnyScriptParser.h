@@ -1057,6 +1057,7 @@ namespace dnyScriptParser {
 			ICodeContext oCurrentCodeContext;
 			std::wstring wszCurrentExpression = L"";
 			bool bInQuotes = false;
+			bool bHadArgumentContainer = false;
 			size_t uiArgContCounter = 0;
 			size_t uiCodeContCounter = 0;
 
@@ -1091,11 +1092,11 @@ namespace dnyScriptParser {
 					if (wszExpression[i] == dnycodeContainer[DNY_BRACKET_START]) {
 						//Increase for each same bracket start character
 						uiCodeContCounter++;
-
+						
 						//Ignore copying only for the first one
 						if (uiCodeContCounter == 1) {
 							//Check for split for the first bracket start
-							if ((this->ShouldSplitOnChar(wszExpression, dnycodeContainer[DNY_BRACKET_START], i, wszExpression.length()))) {
+							if ((!bHadArgumentContainer) && (this->ShouldSplitOnChar(wszExpression, dnycodeContainer[DNY_BRACKET_START], i, wszExpression.length()))) {
 								oCurrentCodeContext.AddPart(wszCurrentExpression);
 								wszCurrentExpression.clear();
 							}
@@ -1106,15 +1107,19 @@ namespace dnyScriptParser {
 						//Decrease for each same bracket start character
 						uiCodeContCounter--;
 
+						//Clear for next expressions
+						bHadArgumentContainer = false;
+						
 						//Split if end of bracket area is reached
 						if (uiCodeContCounter == 0) {
 							oCurrentCodeContext.AddPart(wszCurrentExpression);
 							wszCurrentExpression.clear();
 
-							//Handle if next char is a spacing char
+							//Handle if next chars are spacing chars
 							if (i + 1 < wszExpression.length()) {
-								if ((wszExpression[i + 1] == dnySpaceCharacter) || (wszExpression[i + 1] == dnyTabCharacter))
+								while ((i + 1 < wszExpression.length()) && ((wszExpression[i + 1] == dnySpaceCharacter) || (wszExpression[i + 1] == dnyTabCharacter))) {
 									i++;
+								}
 							}
 
 							continue;
@@ -1138,17 +1143,21 @@ namespace dnyScriptParser {
 							//Decrease for each same bracket start character
 							uiArgContCounter--;
 
+							//Indicate that an argument container ended
+							bHadArgumentContainer = true;
+
 							//Split if end of bracket area is reached
 							if (uiArgContCounter == 0) {
 								oCurrentCodeContext.AddPart(wszCurrentExpression);
 								wszCurrentExpression.clear();
 
-								//Handle if next char is a spacing char
+								//Handle if next chars are spacing chars
 								if (i + 1 < wszExpression.length()) {
-									if ((wszExpression[i + 1] == dnySpaceCharacter) || (wszExpression[i + 1] == dnyTabCharacter))
+									while ((i + 1 < wszExpression.length()) && ((wszExpression[i + 1] == dnySpaceCharacter) || (wszExpression[i + 1] == dnyTabCharacter))) {
 										i++;
+									}
 								}
-
+								
 								continue;
 							}
 						}
@@ -1177,6 +1186,7 @@ namespace dnyScriptParser {
 						this->m_vBlocks.push_back(oCurrentCodeContext);
 						oCurrentCodeContext.Clear();
 						wszCurrentExpression.clear();
+						bHadArgumentContainer = false;
 						continue;
 					}
 				}
