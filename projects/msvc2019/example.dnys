@@ -1,4 +1,4 @@
-#dnyScriptParser demo script file
+#dnyScriptInterpreter demo script file
 
 const C_CONSTANT_STRING string <= "Constant string";
 

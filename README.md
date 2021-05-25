@@ -1,4 +1,4 @@
-# dnyScriptParser developed by Daniel Brendel
+# dnyScriptInterpreter developed by Daniel Brendel
 
 (C) 2017 - 2021 by Daniel Brendel
 
