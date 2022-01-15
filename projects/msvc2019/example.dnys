@@ -36,6 +36,11 @@ function somefunc int(arg1 string, arg2 string)
 	result 0;
 };
 
+function somevoidfunc void()
+{
+	print "Just a test";
+};
+
 print "%C_CONSTANT_STRING";
 set C_CONSTANT_STRING <= "Overwriting does not work";
 print "%C_CONSTANT_STRING";
@@ -61,6 +66,9 @@ mycommand "This is a text";
 mycommand2 5 floatvar;
 
 print "3. %floatvar";
+
+call somevoidfunc() => void;
+call somevoidfunc();
 
 for (i, 10, 0, -dec)
 {
