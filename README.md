@@ -236,7 +236,3 @@ exit; //Aborts script execution\
 
 ## System requirements:
 * ISO-conform C++ compiler
-
-##Changelog:
-* Version 1.0:
-	* (Initial release)
