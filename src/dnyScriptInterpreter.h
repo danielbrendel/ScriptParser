@@ -623,6 +623,11 @@ namespace dnyScriptInterpreter {
 
 			return CT_UNKNOWN;
 		}
+
+		void FreeAllVars(void)
+		{
+			this->Clear();
+		}
 	};
 	
 	class CCommandManager : public CVarManager {
@@ -2952,7 +2957,7 @@ namespace dnyScriptInterpreter {
 			REG_INTERNAL_CMD(L"const", &oHandleConstantDeclaration);
 			REG_INTERNAL_CMD(L"declare", &oHandleVariableDeclaration);
 			REG_INTERNAL_CMD(L"set", &oHandleVariableAssignment);
-			REG_INTERNAL_CMD(L"undeclare", &oHandleVariableRemoval);
+			REG_INTERNAL_CMD(L"unset", &oHandleVariableRemoval);
 			REG_INTERNAL_CMD(L"function", &oHandleFunctionRegistration);
 			REG_INTERNAL_CMD(L"local", &oHandleLocalVarRegistration);
 			REG_INTERNAL_CMD(L"call", &oHandleFunctionCall);

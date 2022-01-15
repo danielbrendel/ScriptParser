@@ -162,7 +162,7 @@ declare classInstance class;
 set @classInstance <= MyTestClass;
 call @classInstance.SomeMethod() => void;
 set someVariable <= "%classInstance.MyVariable";
-undeclare @classInstance;
+unset @classInstance;
 ```
 
 6) Commands
@@ -190,7 +190,7 @@ you should stick to the result-command interface. It supports all dny-data types
 const constname consttype <= value; //Registers a constant with the given name, type and value\
 declare varname vartype; //Registers a global variable with the associated type\
 set varname <= value; //Assigns a value to a global/local variable\
-undeclare varname; //Removes a global variable\
+unset varname; //Removes a global variable\
 function name rettype(paramters) {code} //Defines a function\
 local varname vartype; //Registers a local function variable inside a function with the associated type\
 result value; //Sets the result value of the associated function\

@@ -39,7 +39,7 @@ function somefunc int(arg1 string, arg2 string)
 print "%C_CONSTANT_STRING";
 set C_CONSTANT_STRING <= "Overwriting does not work";
 print "%C_CONSTANT_STRING";
-#undeclare C_CONSTANT_STRING; #Undeclaring a const does also not work 
+#unset C_CONSTANT_STRING; #Unsetting a const does also not work 
 print "%C_CONSTANT_STRING";
 
 function callme int(arg1 int)
@@ -108,17 +108,17 @@ while(%whilevar, -ls, 20)
 	+= whilevar 2;
 };
 
-undeclare whilevar;
+unset whilevar;
 
 print "%whilevar";
 
-undeclare customvar;
+unset customvar;
 
 declare classInstance class;
 set @classInstance <= CTestClass;
 call @classInstance.TestFunc(1234) => void;
 print "Class member value: %classInstance.m_myVar";
-undeclare @classInstance;
+unset @classInstance;
 
 exit;
 
