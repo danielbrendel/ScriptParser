@@ -2,12 +2,12 @@
 
 const C_CONSTANT_STRING string <= "Constant string";
 
-declare boolvar bool;
-declare intvar int;
-declare floatvar float;
-declare stringvar string;
-declare stringvar2 string;
-declare customvar MyDataType;
+global boolvar bool;
+global intvar int;
+global floatvar float;
+global stringvar string;
+global stringvar2 string;
+global customvar MyDataType;
 
 set boolvar <= true;
 set intvar <= 100;
@@ -108,7 +108,7 @@ class CTestClass {
 	};
 };
 
-declare whilevar int;
+global whilevar int;
 set whilevar <= 0;
 while(%whilevar, -ls, 20)
 {
@@ -122,7 +122,7 @@ print "%whilevar";
 
 unset customvar;
 
-declare classInstance class;
+global classInstance class;
 set @classInstance <= CTestClass;
 call @classInstance.TestFunc(1234) => void;
 print "Class member value: %classInstance.m_myVar";

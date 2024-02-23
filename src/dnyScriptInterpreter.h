@@ -289,7 +289,7 @@ namespace dnyScriptInterpreter {
 				return nullptr;
 
 			cvarptr_t pCVar = nullptr;
-
+			
 			//Allocate memory for cvar and instantiate class object according to type
 			switch (eType) {
 			case CT_BOOL:
@@ -308,10 +308,10 @@ namespace dnyScriptInterpreter {
 				return nullptr;
 				break;
 			}
-
+			
 			if (!pCVar)
 				return nullptr;
-
+			
 			return pCVar;
 		}
 
@@ -349,16 +349,16 @@ namespace dnyScriptInterpreter {
 
 			if (!wszName.length())
 				return nullptr;
-
+			
 			//Check if name is already in use
 			if (this->FindCVar(wszName))
 				return nullptr;
-
+			
 			//Spawn CVar object
 			cvarptr_t pCVar = SpawnCVar(wszName, eType, bConst);
 			if (!pCVar)
 				return nullptr;
-
+			
 			//Allocate cvar memory and add to list
 
 			cvar_s* pCVarData = new cvar_s;
@@ -366,7 +366,7 @@ namespace dnyScriptInterpreter {
 				delete pCVar;
 				return nullptr;
 			}
-
+			
 			pCVarData->pcvar = pCVar;
 			pCVarData->eType = eType;
 			pCVarData->wszName = wszName;
@@ -377,7 +377,7 @@ namespace dnyScriptInterpreter {
 				this->m_vCVars.insert(this->m_vCVars.begin() + 0, pCVarData); //Insert as first entry
 			else
 				this->m_vCVars.push_back(pCVarData); //Append to list
-
+			
 			return pCVar;
 		}
 
@@ -1987,17 +1987,38 @@ namespace dnyScriptInterpreter {
 		INTERNAL_COMMAND_HANDLER_METHOD(HandleVariableAssignment, 
 			//Handle variable assignment
 			
-			CHECK_VALID_ARGUMENT_COUNT(4);
+			//CHECK_VALID_ARGUMENT_COUNT(4);
 			
 			std::wstring wszVarName = pThis->ReplaceAllVariables(pContext->GetPartData(1));
-			std::wstring wszVarAllocator = pContext->GetPartData(2);
-			std::wstring wszVarValue = pThis->ReplaceAllVariables(pContext->GetPartData(3));
 
-			if (wszVarAllocator != L"<=")
+			std::wstring wszVarValue = L"";
+			bool bRegisterInContext = false;
+
+			std::wstring wszVarAllocatorOrType = pContext->GetPartData(2);
+			std::wstring wszCheckAllocator = wszVarAllocatorOrType;
+			if (wszVarAllocatorOrType != L"<=") {
+				wszVarValue = pThis->ReplaceAllVariables(pContext->GetPartData(4));
+				wszCheckAllocator = pContext->GetPartData(3);
+
+				bRegisterInContext = true;
+			} else {
+				wszVarValue = pThis->ReplaceAllVariables(pContext->GetPartData(3));
+			}
+
+			if (wszCheckAllocator != L"<=")
 				return false;
-			
+
 			cvartype_e eType = CT_UNKNOWN;
 			cvarptr_t pCvar = nullptr;
+
+			if (bRegisterInContext) {
+				size_t context = pThis->GetCurrentFunctionContext();
+				if (context != std::wstring::npos) {
+					pThis->RegisterLocalVariable(wszVarName, wszVarAllocatorOrType, false, context);
+				} else {
+					pThis->RegisterCVar(wszVarName, pThis->GetTypeFromString(wszVarAllocatorOrType), false, false);
+				}
+			}
 
 			localvar_s* pLocalVar = pThis->FindLocalVariablePtr(wszVarName, pThis->GetCurrentFunctionContext());
 			if (!pLocalVar) {
@@ -2955,7 +2976,7 @@ namespace dnyScriptInterpreter {
 			#define REG_INTERNAL_PREFIX(prefix, pfn) if (!this->AddCommandPrefix(prfix, pfn)) return false;
 
 			REG_INTERNAL_CMD(L"const", &oHandleConstantDeclaration);
-			REG_INTERNAL_CMD(L"declare", &oHandleVariableDeclaration);
+			REG_INTERNAL_CMD(L"global", &oHandleVariableDeclaration);
 			REG_INTERNAL_CMD(L"set", &oHandleVariableAssignment);
 			REG_INTERNAL_CMD(L"unset", &oHandleVariableRemoval);
 			REG_INTERNAL_CMD(L"function", &oHandleFunctionRegistration);
