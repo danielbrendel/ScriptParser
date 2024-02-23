@@ -1448,8 +1448,10 @@ namespace dnyScriptInterpreter {
 			std::wstring wszFuncCode;
 		};
 
+	public:
 		typedef void (*TpfnStandardOutput)(const dnyString& wszOutputText);
 
+	private:
 		std::wstring m_wszScriptDirectory;
 		std::vector<internal_cmd_s> m_vInternalCmdList;
 		std::vector<functions_s> m_vFunctions;
@@ -2416,7 +2418,7 @@ namespace dnyScriptInterpreter {
 		
 			//Parse parameters
 			std::vector<std::wstring> vParams = pThis->ParseArrayList(pContext->GetPartData(1));
-			if (vParams.size() != 4)
+			if ((vParams.size() < 4) || (vParams.size() > 5))
 				return false;
 
 			//Query arguments
@@ -2424,6 +2426,7 @@ namespace dnyScriptInterpreter {
 			dnyInteger iLoopStart = _wtoi64(pThis->ReplaceAllVariables(vParams[1]).c_str());
 			dnyInteger iLoopEnd = _wtoi64(pThis->ReplaceAllVariables(vParams[2]).c_str());
 			std::wstring wszLoopStep = vParams[3];
+			std::wstring wszLoopParam = (vParams.size() >= 5) ? vParams[4] : L"";
 
 			//Setup step-value
 			dnyInteger iLoopStep = 0;
@@ -2453,6 +2456,15 @@ namespace dnyScriptInterpreter {
 
 			//Perform loop
 			while (pVariable->GetValue() != iLoopEnd) { //Do while end value is not yet reached
+				//Execute loop code
+				pThis->ExecuteCode(pContext->GetPartData(2));
+
+				//Add step-value to variable
+				pVariable->SetValue(pVariable->GetValue() + iLoopStep);
+			}
+
+			//Process one more time so the loop is inclusive to the loop end value
+			if (wszLoopParam == L"-eq") {
 				//Execute loop code
 				pThis->ExecuteCode(pContext->GetPartData(2));
 
